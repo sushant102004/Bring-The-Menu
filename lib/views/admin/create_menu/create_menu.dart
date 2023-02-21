@@ -159,23 +159,124 @@ class _CreateMenuState extends State<CreateMenu> {
                 width: Get.width / 5,
                 height: Get.height / 20),
             SizedBox(height: Get.height / 20),
+            // isValueAdded
+            //     ? Obx(() => FutureBuilder(
+            //           future: menuController.getTotalDishes(),
+            //           builder: (context, snapshot) {
+            //             return ListView.builder(
+            //                 itemCount: menuController.totalDishes.toInt(),
+            //                 itemBuilder: (snapshot, index) {
+            //                   return Container();
+            //                 });
+            //           },
+            //         ))
+            // : const Center(
+            //     child: Text(
+            //       'Add Dishes to see them here.',
+            //       style: TextStyle(color: Colors.white),
+            //     ),
+            //   ),
             isValueAdded
-                ? Obx(() => FutureBuilder(
-                      // future: menuController.getAllDishes(),
-                      builder: (context, snapshot) {
-                        return ListView.builder(
-                            itemCount: menuController.totalDishes.toInt(),
-                            itemBuilder: (snapshot, index) {
-                              return Container();
-                            });
-                      },
-                    ))
+                ? Obx(() => ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: menuController.totalDishes.toInt(),
+                    itemBuilder: (snapshot, index) {
+                      return DishContainer();
+                    }))
                 : const Center(
                     child: Text(
                       'Add Dishes to see them here.',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
+
+            DishContainer()
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DishContainer extends StatelessWidget {
+  DishContainer({super.key});
+
+  final constants = Get.put(Constants());
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Get.width / 35),
+      child: Container(
+        width: double.infinity,
+        height: Get.height / 20,
+        decoration: BoxDecoration(
+            border: Border.all(color: constants.inputStrokeColor)),
+        child: Row(
+          children: [
+            Container(
+              width: Get.width / 2,
+              height: Get.height / 20,
+              decoration: BoxDecoration(
+                  border: Border.all(color: constants.inputStrokeColor)),
+              child: Center(
+                child: Text(
+                  'Paneer',
+                  style:
+                      TextStyle(color: constants.whiteTextColor, fontSize: 18),
+                ),
+              ),
+            ),
+            Container(
+              width: Get.width / 10,
+              height: Get.height / 20,
+              decoration: BoxDecoration(
+                  border: Border.all(color: constants.inputStrokeColor)),
+              child: InkWell(
+                onTap: () async {},
+                child: Center(
+                  child: Text(
+                    '*',
+                    style: TextStyle(
+                        color: constants.whiteTextColor, fontSize: 18),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: Get.width / 6,
+              height: Get.height / 20,
+              decoration: BoxDecoration(
+                  border: Border.all(color: constants.inputStrokeColor)),
+              child: InkWell(
+                onTap: () async {},
+                child: Center(
+                  child: Text(
+                    '120',
+                    style: TextStyle(
+                        color: constants.whiteTextColor, fontSize: 18),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: Get.width / 9.45,
+              height: Get.height / 20,
+              decoration: BoxDecoration(
+                  border: Border.all(color: constants.inputStrokeColor)),
+              child: InkWell(
+                onTap: () async {},
+                child: Center(
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.delete_outline,
+                        color: constants.whiteTextColor,
+                      )),
+                ),
+              ),
+            ),
           ],
         ),
       ),
